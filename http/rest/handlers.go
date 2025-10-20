@@ -34,9 +34,8 @@ func GetAllBeverages(w http.ResponseWriter, r *http.Request) {
 	if strings.Contains(acceptHeader, "application/xml") {
 		w.Header().Set("Content-Type", "application/xml")
 		w.Write([]byte(xml.Header))
-		w.Write([]byte(`<Beverages>`))
-		xml.NewEncoder(w).Encode(beverages)
-		w.Write([]byte(`</Beverages>`))
+		response := xml_beverage.BeveragesResponse{Beverages: beverages}
+		xml.NewEncoder(w).Encode(response)
 	} else {
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(beverages)
