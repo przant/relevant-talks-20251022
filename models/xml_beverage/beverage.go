@@ -1,5 +1,7 @@
 package xml_beverage
 
+import "encoding/xml"
+
 // Beverage represents a single Beverage with XML tags
 type Beverage struct {
 	ID      string `xml:"id"`
@@ -14,4 +16,10 @@ type BeveragePack struct {
 	Quantity int     `xml:"quantity"`
 	PackType string  `xml:"pack_type"`
 	Price    float64 `xml:"price,omitempty"`
+}
+
+// BeveragesResponse wraps multiple beverages for XML serialization
+type BeveragesResponse struct {
+	XMLName   xml.Name      `xml:"Beverages"`
+	Beverages []interface{} `xml:"Beverage"`
 }
